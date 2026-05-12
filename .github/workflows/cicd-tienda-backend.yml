@@ -44,6 +44,13 @@ jobs:
             "docker pull ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest",
             "docker stop tienda-backend || true",
             "docker rm tienda-backend || true",
-            "docker run -d --name tienda-backend -p 3001:3001 ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest"
+            docker run -d --name tienda-backend -p 3001:3001 \
+              -e DB_HOST=10.0.157.206 \
+              -e DB_USER=alumno \
+              -e DB_PASSWORD=alumno123 \
+              -e DB_NAME=tienda_perritos \
+              ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest
           ]}' \
           --output text
+
+
