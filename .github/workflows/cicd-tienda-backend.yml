@@ -32,25 +32,20 @@ jobs:
         docker build -t ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest
 
-    - name: Desplegar Backend vía SSM
-      run: |
-        aws ssm send-command \
-          --instance-ids ${{ secrets.EC2_BACKEND_INSTANCE_ID }} \
-          --document-name "AWS-RunShellScript" \
-          --comment "Actualizar tienda-backend desde Docker Hub" \
-          --parameters '{"commands":[
-            "set -e",
-            "docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}",
-            "docker pull ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest",
-            "docker stop tienda-backend || true",
-            "docker rm tienda-backend || true",
-            docker run -d --name tienda-backend -p 3001:3001 \
-              -e DB_HOST=10.0.157.206 \
-              -e DB_USER=alumno \
-              -e DB_PASSWORD=alumno123 \
-              -e DB_NAME=tienda_perritos \
-              ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest
-          ]}' \
-          --output text
+        - name: Desplegar Backend vía SSM
+              run: |
+                aws ssm send-command \
+                  --instance-ids ${{ secrets.EC2_BACKEND_INSTANCE_ID }} \
+                  --document-name "AWS-RunShellScript" \
+                  --comment "Actualizar tienda-backend desde Docker Hub" \
+                  --parameters '{"commands":[
+                    "set -e",
+                    "docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}",
+                    "docker pull ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest",
+                    "docker stop tienda-backend || true",
+                    "docker rm tienda-backend || true",
+                    "docker run -d --name tienda-backend -p 3001:3001 -e DB_HOST=10.0.157.206 -e DB_USER=alumno -e DB_PASSWORD=alumno123 -e DB_NAME=tienda_perritos ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest"
+                  ]}' \
+                  --output text
 
 
