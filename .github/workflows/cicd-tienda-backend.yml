@@ -32,7 +32,7 @@ jobs:
         docker build -t ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/tienda-backend:latest
 
-    - name: Desplegar Backend vía SSM (Método del Profe)
+    - name: Desplegar Backend vía SSM
       run: |
         aws ssm send-command \
           --instance-ids ${{ secrets.EC2_BACKEND_INSTANCE_ID }} \
