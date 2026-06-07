@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:533368342861:task-definition/task-tienda-backend:1",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:093910531990:task-definition/task-backend:1",
   "containerDefinitions": [
     {
       "name": "tienda-backend",
-      "image": "533368342861.dkr.ecr.us-east-1.amazonaws.com/tienda-backend",
+      "image": "public.ecr.aws/nginx/nginx:latest",
       "cpu": 0,
       "portMappings": [
         {
@@ -15,24 +15,7 @@
         }
       ],
       "essential": true,
-      "environment": [
-        {
-          "name": "DB_NAME",
-          "value": "tienda_perritos"
-        },
-        {
-          "name": "DB_HOST",
-          "value": "10.0.157.206"
-        },
-        {
-          "name": "DB_USER",
-          "value": "alumno"
-        },
-        {
-          "name": "DB_PASSWORD",
-          "value": "alumno123"
-        }
-      ],
+      "environment": [],
       "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": [],
@@ -40,7 +23,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/task-tienda-backend",
+          "awslogs-group": "/ecs/task-backend",
           "awslogs-create-group": "true",
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs"
@@ -50,9 +33,9 @@
       "systemControls": []
     }
   ],
-  "family": "task-tienda-backend",
-  "taskRoleArn": "arn:aws:iam::533368342861:role/LabRole",
-  "executionRoleArn": "arn:aws:iam::533368342861:role/LabRole",
+  "family": "task-backend",
+  "taskRoleArn": "arn:aws:iam::093910531990:role/LabRole",
+  "executionRoleArn": "arn:aws:iam::093910531990:role/LabRole",
   "networkMode": "awsvpc",
   "revision": 1,
   "volumes": [],
@@ -65,16 +48,10 @@
       "name": "ecs.capability.execution-role-awslogs"
     },
     {
-      "name": "com.amazonaws.ecs.capability.ecr-auth"
-    },
-    {
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
-    },
-    {
-      "name": "ecs.capability.execution-role-ecr-pull"
     },
     {
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
@@ -101,8 +78,8 @@
   ],
   "cpu": "512",
   "memory": "1024",
-  "registeredAt": "2026-06-03T14:19:26.292Z",
-  "registeredBy": "arn:aws:sts::533368342861:assumed-role/voclabs/user3244023=vicente_ramirez",
+  "registeredAt": "2026-06-07T20:04:58.838Z",
+  "registeredBy": "arn:aws:sts::093910531990:assumed-role/voclabs/user3244023=vicente_ramirez",
   "enableFaultInjection": false,
   "tags": []
 }
