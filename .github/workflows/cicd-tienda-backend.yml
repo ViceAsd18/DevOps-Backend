@@ -53,5 +53,5 @@ jobs:
       with:
         task-definition: ${{ steps.render-web-container.outputs.task-definition }}
         service: servicio-backend
-        cluster: cluster-tienda-perritos
+        cluster: cluster-tienda-perrito
         wait-for-service-stability: true
